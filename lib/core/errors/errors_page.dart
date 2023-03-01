@@ -8,8 +8,8 @@ abstract class ErrorsPage extends StatelessWidget {
 
   const ErrorsPage({
     super.key,
-    this.statusCode = 500,
-    this.message = 'Internal System Error',
+    required this.statusCode,
+    required this.message,
   });
 
   @override
@@ -17,9 +17,15 @@ abstract class ErrorsPage extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('$statusCode', style: context.textTheme.headline6,),
-            Text(message),
+            Text('$statusCode', style: context.textTheme.headline3),
+            const Divider(),
+            Text(
+              message,
+              textAlign: TextAlign.center,
+              style: context.textTheme.headline6,
+            ),
           ],
         ),
       ),

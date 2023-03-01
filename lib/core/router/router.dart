@@ -1,18 +1,18 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:newscastify/core/errors/4xx/error_404_page.dart';
 
+import '../errors/4xx/error_400_page.dart';
 import '../utils/app_routes.dart';
 import 'root/root_routes.dart';
 
 final router = GoRouter(
   initialLocation: '/news',
   routerNeglect: true,
+  errorBuilder: (_, __) => const Error404Page(),
   routes: [
     GoRoute(
       path: '/',
-      routes: rootRoutes,
-      builder: (_, __) =>
-          const Scaffold(body: Center(child: Text('Bad Routing'))),
+      builder: (_, __) => const Error400Page(),
       redirect: (ctx, state) {
         if (state.location == AppRoutes.root) {
           return AppRoutes.news.path;
@@ -20,6 +20,7 @@ final router = GoRouter(
 
         return state.fullpath;
       },
+      routes: rootRoutes,
     ),
   ],
 );
