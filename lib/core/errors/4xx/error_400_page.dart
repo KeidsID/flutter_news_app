@@ -1,6 +1,13 @@
 import '../errors_page.dart';
 
 class Error400Page extends ErrorsPage {
-  const Error400Page({super.key})
-      : super(statusCode: 400, message: 'Bad Request');
+  final String? msg;
+
+  /// Page to display Bad Request (400) error.
+  const Error400Page({super.key, this.msg})
+      : super(
+          statusCode: 400,
+          name: 'Bad Request',
+          message: msg,
+        );
 }

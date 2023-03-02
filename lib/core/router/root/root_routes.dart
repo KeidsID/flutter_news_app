@@ -10,27 +10,32 @@ final rootRoutes = [
     builder: (ctx, state, child) {
       final rootNavIndex = state.location == '/news' ? 0 : 1;
 
-      Provider.of<RootPageProvider>(ctx).setNavigationIndex(rootNavIndex);
+      Provider.of<RootPageProvider>(
+        ctx,
+        listen: false,
+      ).setNavigationIndex(rootNavIndex);
 
       return RootPage(child: child);
     },
     routes: [
       GoRoute(
         path: 'news',
-        builder: (ctx, _) {
-          Provider.of<RootPageProvider>(ctx).setNavigationIndex(0);
-
+        builder: (ctx, __) {
           return const Center(child: Text('News Page'));
         },
       ),
       GoRoute(
         path: 'sources',
-        builder: (ctx, _) {
-          Provider.of<RootPageProvider>(ctx).setNavigationIndex(1);
-
+        builder: (ctx, __) {
           return const Center(child: Text('News Sources Page'));
         },
       )
     ],
+  ),
+  GoRoute(
+    path: 'options',
+    builder: (_, __) => const Scaffold(
+      body: Center(child: Text('Options Page')),
+    ),
   ),
 ];

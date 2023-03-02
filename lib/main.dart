@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:newscastify/ui/providers/root_page_provider.dart';
 import 'package:provider/provider.dart';
 
+import 'ui/providers/root_page_provider.dart';
 import 'core/router/router.dart';
 import 'core/styles/app_theme.dart';
 import 'core/utils/constants.dart';
@@ -17,7 +17,7 @@ class AppRoot extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: RootPageProvider(0)),
+        ChangeNotifierProvider.value(value: RootPageProvider()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

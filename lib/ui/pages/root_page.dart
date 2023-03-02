@@ -27,32 +27,6 @@ class RootPage extends StatelessWidget {
   }
 }
 
-class _NavBarDecos {
-  final Icon icon;
-  final String label;
-
-  const _NavBarDecos({
-    required this.icon,
-    required this.label,
-  });
-}
-
-const _rootPageNavBarDecos = [
-  _NavBarDecos(icon: Icon(Icons.newspaper), label: 'News'),
-  _NavBarDecos(icon: Icon(Icons.public), label: 'Sources'),
-];
-
-void Function(int) _onTapNavBar(BuildContext context) {
-  return (currentIndex) {
-    if (currentIndex == 0) {
-      context.go(AppRoutes.news.path);
-      return;
-    }
-
-    context.go(AppRoutes.sources);
-  };
-}
-
 class _RootThinPage extends StatelessWidget {
   final Widget? child;
 
@@ -65,10 +39,7 @@ class _RootThinPage extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: const Text(appName),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.more_vert),
-          ),
+          _ButtonToOptions.forThinPage(context),
         ],
       ),
       body: Stack(
@@ -77,7 +48,7 @@ class _RootThinPage extends StatelessWidget {
           Column(
             children: const [
               Expanded(child: SizedBox()),
-              Divider(height: 0.5, thickness: 0.5),
+              Divider(height: 1, thickness: 1),
             ],
           )
         ],
@@ -87,17 +58,8 @@ class _RootThinPage extends StatelessWidget {
           return BottomNavigationBar(
             showUnselectedLabels: false,
             currentIndex: prov.navigationIndex,
-            onTap: _onTapNavBar(ctx),
-            items: [
-              BottomNavigationBarItem(
-                icon: _rootPageNavBarDecos[0].icon,
-                label: _rootPageNavBarDecos[0].label,
-              ),
-              BottomNavigationBarItem(
-                icon: _rootPageNavBarDecos[1].icon,
-                label: _rootPageNavBarDecos[1].label,
-              ),
-            ],
+            onTap: _onTapNavBarItem(ctx),
+            items: _RootPageNavBarItems.forThinPage,
           );
         },
       ),
@@ -116,31 +78,21 @@ class _RootWidePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
+        // NavRail
         Consumer<RootPageProvider>(
           builder: (ctx, prov, _) {
             return NavigationRail(
               selectedIndex: prov.navigationIndex,
               labelType: NavigationRailLabelType.selected,
-              onDestinationSelected: _onTapNavBar(ctx),
+              onDestinationSelected: _onTapNavBarItem(ctx),
               leading: const AppIcon(),
-              destinations: [
-                NavigationRailDestination(
-                  icon: _rootPageNavBarDecos[0].icon,
-                  label: Text(_rootPageNavBarDecos[0].label),
-                ),
-                NavigationRailDestination(
-                  icon: _rootPageNavBarDecos[1].icon,
-                  label: Text(_rootPageNavBarDecos[1].label),
-                ),
-              ],
-              trailing: IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.more_horiz),
-              ),
+              destinations: _RootPageNavBarItems.forWidePage,
+              trailing: _ButtonToOptions.forWidePage(ctx),
             );
           },
         ),
-        const VerticalDivider(width: 0.5, thickness: 0.5),
+        const VerticalDivider(width: 1, thickness: 1),
+        // Main content
         Expanded(
           child: Scaffold(
             appBar: AppBar(
@@ -151,6 +103,80 @@ class _RootWidePage extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _NavBarDeco {
+  final Icon icon;
+  final String label;
+
+  const _NavBarDeco({
+    required this.icon,
+    required this.label,
+  });
+}
+
+/// RootPage Navigation Bar Items config for both
+/// thin and wide device.
+///
+/// Access it with class name.
+///
+/// Example:
+/// ```dart
+/// _RootPageNavBarItems.forThinPage; // return items for BottomNavigationBar
+/// ```
+abstract class _RootPageNavBarItems {
+  static const _navBarDecos = [
+    _NavBarDeco(icon: Icon(Icons.newspaper), label: 'News'),
+    _NavBarDeco(icon: Icon(Icons.public), label: 'Sources'),
+  ];
+
+  static final forThinPage = _navBarDecos.map((e) {
+    return BottomNavigationBarItem(icon: e.icon, label: e.label);
+  }).toList();
+
+  static final forWidePage = _navBarDecos.map((e) {
+    return NavigationRailDestination(icon: e.icon, label: Text(e.label));
+  }).toList();
+}
+
+void Function(int) _onTapNavBarItem(BuildContext context) {
+  return (currentIndex) {
+    Provider.of<RootPageProvider>(
+      context,
+      listen: false,
+    ).setNavigationIndexState(currentIndex);
+
+    if (currentIndex == 0) {
+      context.go(AppRoutes.news.path);
+      return;
+    }
+
+    context.go(AppRoutes.sources);
+  };
+}
+
+abstract class _ButtonToOptions {
+  static void Function() _onPressed(BuildContext ctx) {
+    return () => ctx.go(AppRoutes.options);
+  }
+
+  static const _tooltip = 'Options';
+
+  static IconButton forThinPage(BuildContext context) {
+    return IconButton(
+      onPressed: _onPressed(context),
+      icon: const Icon(Icons.more_vert),
+      tooltip: _tooltip,
+    );
+  }
+
+  static IconButton forWidePage(BuildContext context) {
+    return IconButton(
+      onPressed: _onPressed(context),
+      icon: const Icon(Icons.more_horiz),
+      tooltip: _tooltip,
     );
   }
 }

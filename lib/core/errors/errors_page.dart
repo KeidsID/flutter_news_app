@@ -4,12 +4,14 @@ import '../utils/app_extension.dart';
 
 abstract class ErrorsPage extends StatelessWidget {
   final int statusCode;
-  final String message;
+  final String name;
+  final String? message;
 
   const ErrorsPage({
     super.key,
     required this.statusCode,
-    required this.message,
+    required this.name,
+    this.message,
   });
 
   @override
@@ -20,9 +22,10 @@ abstract class ErrorsPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('$statusCode', style: context.textTheme.headline3),
+            Text(name, style: context.textTheme.headline4),
             const Divider(),
             Text(
-              message,
+              message ?? 'Sorry for the inconvenience.',
               textAlign: TextAlign.center,
               style: context.textTheme.headline6,
             ),

@@ -3,7 +3,7 @@ abstract class AppRoutes {
   static const root = '/';
   static const news = _NewsRoutes();
   static const sources = '/sources';
-  static const settings = '/settings';
+  static const options = '/options';
 }
 
 class _NewsRoutes {
