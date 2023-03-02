@@ -76,33 +76,35 @@ class _RootWidePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        // NavRail
-        Consumer<RootPageProvider>(
-          builder: (ctx, prov, _) {
-            return NavigationRail(
-              selectedIndex: prov.navigationIndex,
-              labelType: NavigationRailLabelType.selected,
-              onDestinationSelected: _onTapNavBarItem(ctx),
-              leading: const AppIcon(),
-              destinations: _RootPageNavBarItems.forWidePage,
-              trailing: _ButtonToOptions.forWidePage(ctx),
-            );
-          },
-        ),
-        const VerticalDivider(width: 1, thickness: 1),
-        // Main content
-        Expanded(
-          child: Scaffold(
-            appBar: AppBar(
-              automaticallyImplyLeading: false,
-              title: const Text(appName),
-            ),
-            body: child,
+    return SafeArea(
+      child: Row(
+        children: [
+          // NavRail
+          Consumer<RootPageProvider>(
+            builder: (ctx, prov, _) {
+              return NavigationRail(
+                selectedIndex: prov.navigationIndex,
+                labelType: NavigationRailLabelType.selected,
+                onDestinationSelected: _onTapNavBarItem(ctx),
+                leading: const AppIcon(),
+                destinations: _RootPageNavBarItems.forWidePage,
+                trailing: _ButtonToOptions.forWidePage(ctx),
+              );
+            },
           ),
-        ),
-      ],
+          const VerticalDivider(width: 1, thickness: 1),
+          // Main content
+          Expanded(
+            child: Scaffold(
+              appBar: AppBar(
+                automaticallyImplyLeading: false,
+                title: const Text(appName),
+              ),
+              body: child,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -117,14 +119,12 @@ class _NavBarDeco {
   });
 }
 
-/// RootPage Navigation Bar Items config for both
+/// RootPage Navigation Bar Items configs for both
 /// thin and wide device.
 ///
-/// Access it with class name.
-///
-/// Example:
+/// Access it with class name like example below:
 /// ```dart
-/// _RootPageNavBarItems.forThinPage; // return items for BottomNavigationBar
+/// _RootPageNavBarItems.forThinPage;
 /// ```
 abstract class _RootPageNavBarItems {
   static const _navBarDecos = [
@@ -143,20 +143,28 @@ abstract class _RootPageNavBarItems {
 
 void Function(int) _onTapNavBarItem(BuildContext context) {
   return (currentIndex) {
-    Provider.of<RootPageProvider>(
+    final prov = Provider.of<RootPageProvider>(
       context,
       listen: false,
-    ).setNavigationIndexState(currentIndex);
+    );
 
     if (currentIndex == 0) {
       context.go(AppRoutes.news.path);
+      prov.notifyStateChanges();
       return;
     }
 
     context.go(AppRoutes.sources);
+    prov.notifyStateChanges();
   };
 }
 
+/// Button to go to `/options` configs for RootPage.
+/// 
+/// Access it with class name like example below:
+/// ```dart
+/// _ButtonToOptions.forThinPage(context);
+/// ```
 abstract class _ButtonToOptions {
   static void Function() _onPressed(BuildContext ctx) {
     return () => ctx.go(AppRoutes.options);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../../../ui/pages/options_page.dart';
 import '../../../ui/pages/root_page.dart';
 import '../../../ui/providers/root_page_provider.dart';
 
@@ -34,8 +35,6 @@ final rootRoutes = [
   ),
   GoRoute(
     path: 'options',
-    builder: (_, __) => const Scaffold(
-      body: Center(child: Text('Options Page')),
-    ),
+    builder: (_, __) => const OptionsPage(),
   ),
 ];

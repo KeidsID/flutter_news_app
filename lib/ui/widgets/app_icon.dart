@@ -6,7 +6,7 @@ import '../../core/utils/app_extension.dart';
 class AppIcon extends StatelessWidget {
   final double? height;
 
-  const AppIcon({Key? key, this.height = kToolbarHeight}) : super(key: key);
+  const AppIcon({Key? key, this.height}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class AppIcon extends StatelessWidget {
         ],
       ),
       padding: const EdgeInsets.symmetric(horizontal: 8),
-      height: height,
+      height: height ?? kToolbarHeight,
       child: Image.asset(
         'assets/images/ic-news.png',
         fit: BoxFit.cover,

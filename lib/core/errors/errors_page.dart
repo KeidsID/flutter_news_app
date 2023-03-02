@@ -7,6 +7,7 @@ abstract class ErrorsPage extends StatelessWidget {
   final String name;
   final String? message;
 
+  /// Page to display errors info.
   const ErrorsPage({
     super.key,
     required this.statusCode,

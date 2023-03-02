@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
 
-import '../errors/4xx/error_400_page.dart';
+import '../errors/4xx/error_422_page.dart';
 import '../errors/4xx/error_404_page.dart';
 import '../utils/app_routes.dart';
 import 'root/root_routes.dart';
@@ -12,7 +12,7 @@ final router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (_, __) => const Error400Page(
+      builder: (_, __) => const Error422Page(
         msg: 'Make sure you navigate using the available UI',
       ),
       redirect: (ctx, state) {
