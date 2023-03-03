@@ -1,9 +1,8 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/utils/app_routes.dart';
-import '../../core/utils/constants.dart';
 import '../providers/root_page_provider.dart';
 import '../widgets/app_icon.dart';
 

@@ -1,10 +1,9 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'core/router/router.dart';
-import 'core/styles/app_theme.dart';
-import 'core/utils/constants.dart';
-import 'get_it/init.dart' as di;
+import 'service_locator/init.dart' as di;
+import 'router/router.dart';
 import 'ui/providers/options_page_provider.dart';
 import 'ui/providers/root_page_provider.dart';
 
@@ -30,8 +29,8 @@ class AppRoot extends StatelessWidget {
         builder: (_, prov, __) => MaterialApp.router(
           debugShowCheckedModeBanner: false,
           title: appName,
-          theme: appLightTheme,
-          darkTheme: appDarkTheme,
+          theme: AppThemes.theme,
+          darkTheme: AppThemes.darkTheme,
           themeMode: prov.themeMode,
           routerConfig: router,
         ),

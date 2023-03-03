@@ -1,21 +1,19 @@
+import 'package:core/core.dart';
 import 'package:go_router/go_router.dart';
 
-import '../errors/4xx/error_422_page.dart';
-import '../errors/4xx/error_404_page.dart';
-import '../utils/app_routes.dart';
 import 'root/root_routes.dart';
 
 final router = GoRouter(
   initialLocation: '/news',
   routerNeglect: true,
-  errorBuilder: (_, __) => const Error404Page(),
+  errorBuilder: (_, __) => ErrorPages.invariant.notFound,
   routes: [
     GoRoute(
       path: '/',
-      builder: (_, __) => const Error422Page(
-        msg: 'Make sure you navigate using the available UI',
+      builder: (_, __) => ErrorPages.invariant.unprocessableEntity(
+        'Make sure you navigate using the available UI',
       ),
-      redirect: (ctx, state) {
+      redirect: (_, state) {
         if (state.location == AppRoutes.root) {
           return AppRoutes.news.path;
         }

@@ -1,7 +1,6 @@
+import 'package:core/common/styles/app_theme.dart';
+import 'package:core/common/utils/app_extensions.dart';
 import 'package:flutter/material.dart';
-
-import '../../core/styles/app_theme.dart';
-import '../../core/utils/app_extension.dart';
 
 class AppIcon extends StatelessWidget {
   final double? height;

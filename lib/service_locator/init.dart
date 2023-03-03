@@ -6,8 +6,14 @@ import '../ui/providers/root_page_provider.dart';
 
 part 'regis_state_manager.dart';
 
+/// Get registered depedencies anywhere.
+/// 
+/// ```dart
+/// locator<DesiredDepedencies>()
+/// ```
 final locator = GetIt.instance;
 
+/// Call this first before using the locator.
 Future<void> init() async {
   _regisStateManager();
 

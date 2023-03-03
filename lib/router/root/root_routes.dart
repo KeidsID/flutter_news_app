@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../../ui/pages/options_page.dart';
-import '../../../ui/pages/root_page.dart';
-import '../../../ui/providers/root_page_provider.dart';
+import '../../ui/pages/options_page.dart';
+import '../../ui/pages/root_page.dart';
+import '../../ui/providers/root_page_provider.dart';
 
 final rootRoutes = [
   ShellRoute(

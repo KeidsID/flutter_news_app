@@ -1,4 +1,4 @@
-import '../errors_page.dart';
+import '../../errors_page.dart';
 
 class Error400Page extends ErrorsPage {
   final String? msg;

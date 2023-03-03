@@ -1,12 +1,11 @@
+import 'package:core/common/utils/app_extensions.dart';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:newscastify/core/utils/app_routes.dart';
-import 'package:newscastify/ui/providers/root_page_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/utils/app_extension.dart';
-import '../../core/utils/constants.dart';
 import '../providers/options_page_provider.dart';
+import '../providers/root_page_provider.dart';
 
 class OptionsPage extends StatelessWidget {
   const OptionsPage({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 extension CommonCtx on BuildContext {
-  /// Check current theme by Theme.brightness.
+  /// Check current theme by current `ThemeData.brightness`.
   bool get isDarkMode {
     final brightness = Theme.of(this).brightness;
 
@@ -11,6 +11,9 @@ extension CommonCtx on BuildContext {
   /// The size of the media in logical pixels (e.g, the size of the screen).
   Size get screenSize => MediaQuery.of(this).size;
 
-  /// Current App TextTheme.
+  /// Current App `ThemeData`.
+  ThemeData get theme => Theme.of(this);
+
+  /// Current App `TextTheme`.
   TextTheme get textTheme => Theme.of(this).textTheme;
 }

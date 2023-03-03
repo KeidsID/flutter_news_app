@@ -1,4 +1,11 @@
-/// List of routes path.
+/// List of routes path for go_router navigation.
+/// 
+/// Usecase example:
+/// ```dart
+/// void function onTapButton (BuildContext context) {
+///   context.go(AppRoutes.root); // Go to `/` page.
+/// }
+/// ```
 abstract class AppRoutes {
   static const root = '/';
   static const news = _NewsRoutes();
