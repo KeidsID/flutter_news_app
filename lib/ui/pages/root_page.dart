@@ -159,7 +159,7 @@ void Function(int) _onTapNavBarItem(BuildContext context) {
 }
 
 /// Button to go to `/options` configs for RootPage.
-/// 
+///
 /// Access it with class name like example below:
 /// ```dart
 /// _ButtonToOptions.forThinPage(context);
@@ -173,6 +173,7 @@ abstract class _ButtonToOptions {
 
   static IconButton forThinPage(BuildContext context) {
     return IconButton(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       onPressed: _onPressed(context),
       icon: const Icon(Icons.more_vert),
       tooltip: _tooltip,

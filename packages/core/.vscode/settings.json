@@ -1,0 +1,39 @@
+{
+  "tabsColor.activeTab": {
+    "backgroundColor": "default",
+    "fontColor": "#fff"
+  },
+
+  "tabsColor.byDirectory": {
+    "android": {
+      "backgroundColor": "#8bc34a3f",
+      "fontColor": "#fff"
+    },
+
+    "lib": {
+      "backgroundColor": "#c0ca333f",
+      "fontColor": "#fff"
+    },
+    "lib\\errors": {
+      "backgroundColor": "#ef53503f",
+      "fontColor": "#fff"
+    },
+    "lib\\routes": {
+      "backgroundColor": "#43a0473f",
+      "fontColor": "#fff"
+    },
+    "lib\\styles": {
+      "backgroundColor": "#42a5f53f",
+      "fontColor": "#fff"
+    },
+    "lib\\utils": {
+      "backgroundColor": "#7cb3423f",
+      "fontColor": "#fff"
+    },
+
+    "test": {
+      "backgroundColor": "#00bfa53f",
+      "fontColor": "#fff"
+    },
+  }
+}

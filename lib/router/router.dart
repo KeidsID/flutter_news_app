@@ -1,12 +1,14 @@
 import 'package:core/core.dart';
 import 'package:go_router/go_router.dart';
 
-import 'root/root_routes.dart';
+import 'routes/routes.dart';
 
 final router = GoRouter(
   initialLocation: '/news',
   routerNeglect: true,
-  errorBuilder: (_, __) => ErrorPages.invariant.notFound,
+  errorBuilder: (_, __) => ErrorPages.invariant.notFound(
+    "Make sure you didn't type the URL path incorrectly.",
+  ),
   routes: [
     GoRoute(
       path: '/',
@@ -20,7 +22,7 @@ final router = GoRouter(
 
         return state.fullpath;
       },
-      routes: rootRoutes,
     ),
+    ...routes,
   ],
 );

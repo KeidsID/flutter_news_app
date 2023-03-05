@@ -2,7 +2,7 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'service_locator/init.dart' as di;
+import 'service_locator/init.dart' as sl;
 import 'router/router.dart';
 import 'ui/providers/options_page_provider.dart';
 import 'ui/providers/root_page_provider.dart';
@@ -10,7 +10,7 @@ import 'ui/providers/root_page_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await di.init();
+  await sl.init();
 
   runApp(const AppRoot());
 }
@@ -22,8 +22,8 @@ class AppRoot extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: di.locator<RootPageProvider>()),
-        ChangeNotifierProvider.value(value: di.locator<OptionsPageProvider>()),
+        ChangeNotifierProvider.value(value: sl.locator<RootPageProvider>()),
+        ChangeNotifierProvider.value(value: sl.locator<OptionsPageProvider>()),
       ],
       child: Consumer<OptionsPageProvider>(
         builder: (_, prov, __) => MaterialApp.router(

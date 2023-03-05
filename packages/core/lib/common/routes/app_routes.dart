@@ -18,6 +18,6 @@ class _NewsRoutes {
 
   final path = '/news';
 
-  /// Get path `/news` with param id.
-  String pathWithId(String id) => '$path/:$id';
+  /// For `/news/:id` route.
+  String pathWithId(String id) => '$path/$id';
 }

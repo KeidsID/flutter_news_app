@@ -7,6 +7,7 @@ import 'common/errors/errors.dart';
 import 'common/styles/app_theme.dart';
 
 export 'common/routes/app_routes.dart';
+export 'common/utils/app_extensions.dart';
 export 'common/utils/constants.dart';
 
 /// Get `ThemeData` for both theme mode to use
@@ -29,12 +30,12 @@ abstract class AppThemes {
 /// ErrorPages.invariant.badRequest('Your custom msg'); // for 400 status code
 /// ```
 abstract class ErrorPages {
-  /// Object that contain Widgets to display client request errors details.
+  /// An object that contains Widgets to display client request errors details.
   ///
-  /// `Note:` It is not cover all the 4xx status codes, such as 403 (Forbidden).
+  /// `Note:` It is not cover all the `4xx` status codes, such as `403` (Forbidden).
   static final invariant = _InvariantErrorPages(
     badRequest: (msg) => Error400Page(msg: msg),
-    notFound: const Error404Page(),
+    notFound: (msg) => Error404Page(msg: msg),
     unprocessableEntity: (msg) => Error422Page(msg: msg),
   );
 
@@ -48,17 +49,17 @@ class _InvariantErrorPages {
   /// Status Code `400`.
   ///
   /// The request could not be understood or was missing required parameters.
-  final Widget Function(String msg) badRequest;
+  final Error400Page Function(String? msg) badRequest;
 
   /// Status Code `404`.
   ///
   /// Resource was not found.
-  final Widget notFound;
+  final Error404Page Function(String? msg) notFound;
 
   /// Status Code `422`.
   ///
   /// Request was well-formed but was unable to be followed due to semantic errors.
-  final Widget Function(String msg) unprocessableEntity;
+  final Error422Page Function(String? msg) unprocessableEntity;
 
   const _InvariantErrorPages({
     required this.badRequest,

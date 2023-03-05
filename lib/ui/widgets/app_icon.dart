@@ -1,5 +1,5 @@
 import 'package:core/common/styles/app_theme.dart';
-import 'package:core/common/utils/app_extensions.dart';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
 class AppIcon extends StatelessWidget {
@@ -24,7 +24,7 @@ class AppIcon extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8),
       height: height ?? kToolbarHeight,
       child: Image.asset(
-        'assets/images/ic-news.png',
+        appIconUrl,
         fit: BoxFit.cover,
       ),
     );

@@ -1,7 +1,9 @@
 name: news
-description: A new Flutter package project.
+description: Package to handle /news endpoint.
 version: 0.0.1
 homepage:
+
+publish_to: "none"
 
 environment:
   sdk: '>=2.18.6 <3.0.0'
@@ -10,6 +12,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  core:
+    path: ../core
 
 dev_dependencies:
   flutter_test:

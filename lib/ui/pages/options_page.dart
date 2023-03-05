@@ -1,4 +1,3 @@
-import 'package:core/common/utils/app_extensions.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -28,38 +27,37 @@ class OptionsPage extends StatelessWidget {
         }),
         title: const Text(appName),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(8),
-        child: ListView(
-          children: [
-            ListTile(
-              leading: Icon(
-                (context.isDarkMode) ? Icons.dark_mode : Icons.light_mode,
-              ),
-              title: const Text('App Theme'),
-              trailing: Consumer<OptionsPageProvider>(
-                builder: (_, prov, __) => DropdownButton<ThemeMode>(
-                  value: prov.themeMode,
-                  items: const [
-                    DropdownMenuItem(
-                      value: ThemeMode.light,
-                      child: Text('Light'),
-                    ),
-                    DropdownMenuItem(
-                        value: ThemeMode.dark, child: Text('Dark')),
-                    DropdownMenuItem(
-                      value: ThemeMode.system,
-                      child: Text('Sync with Device'),
-                    ),
-                  ],
-                  onChanged: (value) {
-                    prov.setThemeMode(value!);
-                  },
-                ),
+      body: ListView(
+        children: [
+          ListTile(
+            leading: Icon(
+              (context.isDarkMode) ? Icons.dark_mode : Icons.light_mode,
+            ),
+            title: const Text('App Theme'),
+            trailing: Consumer<OptionsPageProvider>(
+              builder: (_, prov, __) => DropdownButton<ThemeMode>(
+                value: prov.themeMode,
+                items: const [
+                  DropdownMenuItem(
+                    value: ThemeMode.light,
+                    child: Text('Light'),
+                  ),
+                  DropdownMenuItem(
+                    value: ThemeMode.dark,
+                    child: Text('Dark'),
+                  ),
+                  DropdownMenuItem(
+                    value: ThemeMode.system,
+                    child: Text('Sync with Device'),
+                  ),
+                ],
+                onChanged: (value) {
+                  prov.setThemeMode(value!);
+                },
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
