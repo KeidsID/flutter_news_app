@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OptionsPageProvider extends ChangeNotifier {
-  late SharedPreferences _prefs;
+  final SharedPreferences _prefs;
 
-  OptionsPageProvider(SharedPreferences sharedPrefs) {
-    _prefs = sharedPrefs;
-
+  /// `OptionsPage` state provider.
+  OptionsPageProvider(this._prefs) {
     _themeMode = ThemeMode.values[_prefs.getInt(_themeModePrefKey) ?? 0];
   }
 

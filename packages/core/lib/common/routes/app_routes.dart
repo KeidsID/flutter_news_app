@@ -1,5 +1,5 @@
 /// List of routes path for go_router navigation.
-/// 
+///
 /// Usecase example:
 /// ```dart
 /// void function onTapButton (BuildContext context) {
@@ -16,8 +16,13 @@ abstract class AppRoutes {
 class _NewsRoutes {
   const _NewsRoutes();
 
+  /// Root path of news (/news).
   final path = '/news';
 
-  /// For `/news/:id` route.
+  /// News path with id.
+  ///
+  /// ```dart
+  /// pathWithId('fulan'); // return '/news/fulan'
+  /// ```
   String pathWithId(String id) => '$path/$id';
 }

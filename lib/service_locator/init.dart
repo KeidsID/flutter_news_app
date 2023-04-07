@@ -11,13 +11,20 @@ part 'register_state_manager.dart';
 /// ```dart
 /// locator<DesiredDepedencies>()
 /// ```
+///
+/// `Note`: Make sure to call init() on main() before using locator.
+/// ```dart
+/// void main() async {
+///   await init()
+/// }
+/// ```
 final locator = GetIt.instance;
 
 /// Call this first before using the locator.
 Future<void> init() async {
-  _registerStateManager();
-
   final prefs = await SharedPreferences.getInstance();
 
-  locator.registerSingleton(prefs);
+  locator.registerSingleton<SharedPreferences>(prefs);
+
+  _registerStateManager();
 }

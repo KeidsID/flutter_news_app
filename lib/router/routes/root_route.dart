@@ -24,11 +24,9 @@ final rootRoute = ShellRoute(
       path: '/news',
       pageBuilder: (ctx, state) => CustomTransitionPage(
         key: state.pageKey,
-        child: Expanded(
-          child: Container(
-            color: ctx.theme.scaffoldBackgroundColor,
-            child: const NewsPage(dummyNewsList),
-          ),
+        child: Container(
+          color: ctx.theme.scaffoldBackgroundColor,
+          child: NewsPage(dummyNewsList),
         ),
         transitionsBuilder: _rootTransitionBuilder,
       ),
@@ -60,12 +58,10 @@ Widget _rootTransitionBuilder(
 }
 
 Widget _dummyPage(BuildContext ctx, String txt) {
-  return Expanded(
-    child: Container(
-      color: ctx.theme.scaffoldBackgroundColor,
-      child: Center(
-        child: Text(txt, style: ctx.textTheme.headline6),
-      ),
+  return Container(
+    color: ctx.theme.scaffoldBackgroundColor,
+    child: Center(
+      child: Text(txt, style: ctx.textTheme.headline6),
     ),
   );
 }

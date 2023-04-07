@@ -11,20 +11,23 @@ class OptionsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final unlistenProvs = _UnlistenProvs(
+      rootPage: Provider.of<RootPageProvider>(context, listen: false),
+      optionsPage: Provider.of<OptionsPageProvider>(context, listen: false),
+    );
+
     return Scaffold(
       appBar: AppBar(
-        leading: Consumer<RootPageProvider>(builder: (context, prov, _) {
-          return IconButton(
-            onPressed: () {
-              final path = (prov.navigationIndex == 0)
-                  ? AppRoutes.news.path
-                  : AppRoutes.sources;
+        leading: IconButton(
+          onPressed: () {
+            final path = (unlistenProvs.rootPage.navigationIndex == 0)
+                ? AppRoutes.news.path
+                : AppRoutes.sources;
 
-              context.go(path);
-            },
-            icon: const Icon(Icons.arrow_back),
-          );
-        }),
+            context.go(path);
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
         title: const Text(appName),
       ),
       body: ListView(
@@ -34,31 +37,46 @@ class OptionsPage extends StatelessWidget {
               (context.isDarkMode) ? Icons.dark_mode : Icons.light_mode,
             ),
             title: const Text('App Theme'),
-            trailing: Consumer<OptionsPageProvider>(
-              builder: (_, prov, __) => DropdownButton<ThemeMode>(
-                value: prov.themeMode,
-                items: const [
-                  DropdownMenuItem(
-                    value: ThemeMode.light,
-                    child: Text('Light'),
-                  ),
-                  DropdownMenuItem(
-                    value: ThemeMode.dark,
-                    child: Text('Dark'),
-                  ),
-                  DropdownMenuItem(
-                    value: ThemeMode.system,
-                    child: Text('Sync with Device'),
-                  ),
-                ],
-                onChanged: (value) {
-                  prov.setThemeMode(value!);
-                },
-              ),
+            trailing: DropdownButton<ThemeMode>(
+              value: unlistenProvs.optionsPage.themeMode,
+              items: const [
+                DropdownMenuItem(
+                  value: ThemeMode.light,
+                  child: Text('Light'),
+                ),
+                DropdownMenuItem(
+                  value: ThemeMode.dark,
+                  child: Text('Dark'),
+                ),
+                DropdownMenuItem(
+                  value: ThemeMode.system,
+                  child: Text('Sync with Device'),
+                ),
+              ],
+              onChanged: (value) {
+                unlistenProvs.optionsPage.setThemeMode(value!);
+              },
             ),
           ),
         ],
       ),
     );
   }
+}
+
+class _UnlistenProvs {
+  final RootPageProvider rootPage;
+  final OptionsPageProvider optionsPage;
+
+  /// Please provide the provider with `listen` set to false.
+  /// ```dart
+  /// _UnlistenProvs(
+  ///   rootPage: Provider.of<RootPageProvider>(context, listen: false),
+  ///   ...
+  /// )
+  /// ```
+  _UnlistenProvs({
+    required this.rootPage,
+    required this.optionsPage,
+  });
 }

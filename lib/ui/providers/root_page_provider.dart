@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class RootPageProvider extends ChangeNotifier {
-  /// RootPage states provider.
+  /// `RootPage` states provider.
   RootPageProvider();
 
   int _navigationIndex = 0;
